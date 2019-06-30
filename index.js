@@ -12,9 +12,9 @@ module.exports = function (options) {
     }
     let fileReg;
     if (options.es6import) {
-        fileReg = /import\s["'](.*\.js)["']/gi
-    } else {
-        fileReg = /@import\s["'](.*\.js)["']/gi
+        fileReg = /\nimport\s["'](.*\.js)["']/gi
+      } else {
+        fileReg = /\n@import\s["'](.*\.js)["']/gi
     }
 
     if (!fs.existsSync(path)) {
@@ -57,7 +57,7 @@ module.exports = function (options) {
 		}
 
     let content
-    try { 
+    try {
       content = importJS(file.path)
     } catch(e) {
       cb(new gutil.PluginError('gulp-js-import', e.message))
